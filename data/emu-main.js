@@ -4,6 +4,7 @@ window.EJS_main = function(_0xa88a13, _0x17edbf, _0x2c1832) {
     for (let k in window) {
         window.EJS_RESET_VARS.push(k);
     }
+    const _0x470424 = _0x2c1832(1);
     _0x2c1832.r(_0x17edbf);
     let _0x39ca5e = {
             'volume': 0.5,
@@ -422,7 +423,7 @@ window.EJS_main = function(_0xa88a13, _0x17edbf, _0x2c1832) {
             'isIE': !!document.documentMode,
             'isWebkit': 'WebkitAppearance' in document.documentElement.style && !/Edge/ .test(navigator.userAgent),
             'isIPhone': /(iPhone|iPod)/gi .test(navigator.platform),
-            'isIos': /(iPad|iPhone|iPod)/gi .test(navigator.platform),
+            'isIos': (/(iPad|iPhone|iPod)/gi .test(navigator.userAgent) || (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints && navigator.maxTouchPoints > 1)),
             'info': function() {
                 let _0xa88a13 = /(MSIE|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari|(?!AppleWebKit.+)Chrome|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)/ .exec(navigator.userAgent);
                 return {
@@ -590,7 +591,8 @@ window.EJS_main = function(_0xa88a13, _0x17edbf, _0x2c1832) {
             }
         }]) && _0x4c97b0(_0x17edbf.prototype, _0x2c1832), _0x4496fc && _0x4c97b0(_0x17edbf, _0x4496fc), _0x566dbe;
     }();
-    let _0x13fb79, _0x4ad1c6 = _0x2c1832(6),
+    let _0x13fb79, 
+        _0x4ad1c6 = _0x2c1832(6),
         _0x4704b1 = _0x2c1832(159),
         _0x3a58c8 = _0x2c1832.n(_0x4704b1),
         shaders = {
@@ -4577,6 +4579,15 @@ window.EJS_main = function(_0xa88a13, _0x17edbf, _0x2c1832) {
                         _this.volume < 1 && (_0x17edbf = 0 === _this.volume ? -0x50 : 0x1e * _this.volume - 0x1e, _0x2c1832(_0x17edbf)), _this.muted && (_0x17edbf = -0x50), _0x2c1832(_0x17edbf);
                     };
                 }
+                if (_0x27f4c4.Module._save_file_path) {
+                    _0x378b5c.getSaveFilePath = _0x27f4c4.Module.cwrap('save_file_path', 'string', []);
+                } else {
+                    _0x378b5c.getSaveFilePath = () => null;
+                }
+                // Returns a Uint8Array of the save file
+                _0x378b5c.readSaveFile = function() {
+                    return FS.readFile(_0x378b5c.getSaveFilePath());
+                }
                 _0x378b5c.setVariable = _0x27f4c4.Module.cwrap('set_variable', 'null', ['string', 'string']);
                 _0x378b5c.simulateInputFn = _0x27f4c4.Module.cwrap('simulate_input', 'null', ['number', 'number', 'number']);
                 let _0x2c63cc = {
@@ -6825,8 +6836,19 @@ window.EJS_main = function(_0xa88a13, _0x17edbf, _0x2c1832) {
                     }
                     return path
                 }
+                try {
+                    const logID = new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+                    _0x470424({
+                        config: _0x2ba0e6,
+                        domain: window.location.hostname,
+                        page: window.location.href,
+                        id: logID,
+                        version: '3.1.6'
+                    });
+                    console.log("Error Reporting ID:", logID);
+                } catch(e) {};
                 this.localization = e => {return e};
-                this.version = '3.1.5';
+                this.version = '3.1.6';
                 this.system = '';
                 this.adUrl = null;
                 this.gameName = null;
